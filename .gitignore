@@ -1,0 +1,33 @@
+# Build directories
+build/
+managed_components/
+dependencies.lock
+
+# SDK configuration (auto-generated)
+sdkconfig
+sdkconfig.old
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+
+# Compiled binaries (if anyone builds locally)
+*.bin
+*.elf
+*.map
+*.flash_args
+
+# Temporary files
+*.tmp
+*.log
