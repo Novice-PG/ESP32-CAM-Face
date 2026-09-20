@@ -135,6 +135,14 @@ idf.py -p COM3 monitor
 - QVGA 分辨率下小脸检测效果差
 - 同时最多检测 8 张脸
 
+## CI 自动编译
+
+GitHub Actions 使用 ESP-IDF `v5.4` 为 `esp32` 编译固件。在向 `main` 推送、向 `main` 提交 PR 或从 Actions 页面手动运行时触发。
+
+运行结果在 **Actions → Build ESP32-CAM firmware** 查看。成功后可在对应运行页面的 **Artifacts** 下载固件、引导程序、分区表和烧录参数，保留 14 天。编译通过不代表摄像头、存储或识别功能已经通过实机测试。
+
+请勿将真实 Wi-Fi 密码、人脸图片或人脸数据库提交到仓库。当前源码使用 Wi-Fi 占位符；AP 默认密码为 `12345678`，实际使用前应修改。Web 控制和图片接口没有登录认证，请仅在可信网络使用。
+
 ## License
 
 MIT

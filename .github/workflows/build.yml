@@ -1,0 +1,45 @@
+name: Build ESP32-CAM firmware
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: firmware-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Build with ESP-IDF
+        uses: espressif/esp-idf-ci-action@v1
+        with:
+          esp_idf_version: v5.4
+          target: esp32
+          path: .
+          command: idf.py build
+
+      - name: Upload firmware and flash metadata
+        uses: actions/upload-artifact@v4
+        with:
+          name: esp32-cam-firmware-${{ github.sha }}
+          path: |
+            build/esp32cam_face.bin
+            build/esp32cam_face.elf
+            build/bootloader/bootloader.bin
+            build/partition_table/partition-table.bin
+            build/flash_args
+            build/flasher_args.json
+          if-no-files-found: error
+          retention-days: 14
